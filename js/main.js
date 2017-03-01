@@ -265,21 +265,23 @@ function displayQuery(querySelector, color) {
   var inputs = document.querySelectorAll('form');
 
 //Indicate error message on default
-  window.onload = inputValidation();
-//Call the eventListener function for real time form validation 
+  inputValidation();
+
+//Call the eventListener function for real time form validation
   eventListener(inputs,'keypress');
   eventListener(inputs,'mouseover');
   eventListener(creditCard,'keypress');
 
 //  When submit, check whether the form is valid
-    submit.addEventListener('click', (e) => {
+  submit.addEventListener('click', (e) => {
+    if(inputValidation()) {
+      console.log('Completed submit')
+      return true;
+    } else {
       e.preventDefault();
-      if(inputValidation()) {
-        console.log('Completed submit')
-        return true;
-      } else {
-        return false;
-      }
-    });
+      console.log('false');
+        //return false;
+    }
+  });
 
 });
